@@ -82,8 +82,8 @@ module.exports = function(grunt) {
   // A method for uploading a single file
   function sftpPut(inFilename, cb) {
     var fromFile, toFile, from, to;
-
-    fromFile = localRoot + path.sep + inFilename;
+    inFilename = path.basename(inFilename);
+    fromFile = localRoot + inFilename;
     toFile = remoteRoot + remoteSep + inFilename;
 
     grunt.verbose.write(fromFile + ' to ' + toFile);
@@ -187,7 +187,7 @@ module.exports = function(grunt) {
     var ret = [];
     for(var n in toTransfer ){
       for( var k in toTransfer[n]){
-        ret.push( (n==path.sep?"":n+path.sep)+toTransfer[n][k]);
+        ret.push( (n=="/"?"":n+"/")+toTransfer[n][k]);
       }
     }
     return ret;
