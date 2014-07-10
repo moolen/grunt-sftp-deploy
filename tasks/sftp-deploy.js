@@ -81,8 +81,9 @@ module.exports = function(grunt) {
 
   // A method for uploading a single file
   function sftpPut(inFilename, cb) {
-    var fromFile, toFile, from, to;
-    inFilename = path.basename(inFilename);
+    var fromFile, toFile, from, to, regExp;
+    
+    inFilename = inFilename.replace(/\\/g, '/');
     fromFile = localRoot + inFilename;
     toFile = remoteRoot + remoteSep + inFilename;
 
